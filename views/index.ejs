@@ -1,0 +1,19 @@
+<html>
+    <%- include('./common/header.ejs') %>
+    
+    <body>
+        <%- include('./common/navbar.ejs') %> 
+        <div class='blogs__container'>
+          <% if(blogs.length > 0){ %>
+          <% blogs.forEach((blog)=>{ %>
+              <div class='blog__row'>
+                <h3><%= blog.title %></h3>
+                <p><%= blog.body %></p>
+              </div>
+            <% })}else{%>
+                <h2>There are no blogs in the database.</h2>
+                <%}%>
+                
+        </div>
+    </body>
+</html>
