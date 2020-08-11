@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const Blog = require('./models/blogs');
-const bodyparser = require('body-parser');
+
 
 const app = express();
 
@@ -24,7 +24,7 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true}));
-// app.use(bodyparser.json());
+
 
 app.get('/', (req, res) => {
     Blog.find().sort({ createdAt: -1})
@@ -41,6 +41,13 @@ app.get('/addblog', (req, res) => {
     res.render('addblog.ejs');
 });
 
+app.get('/blogs/:id', (req, res) => {
+    const id = req.params.id;
+    Blog.findById(id)
+        .then((result) => {res.render('blogPost', { blog: result})})
+        .catch(err => console.log(err));
+})
+
 app.post('/blogs', (req, res) => {
     console.log(req.body);
     const blog = new Blog(req.body);
@@ -51,3 +58,13 @@ app.post('/blogs', (req, res) => {
         })
         .catch((err) => {console.log(err)})
 });
+
+app.delete('/blogs/:id', (req, res) => {
+    const id = req.params.id;
+    Blog.findByIdAndDelete(id)
+        .then((result) => {
+            res.json({ redirect: '/'});
+        })
+        .catch((err) => console.log(err));
+  
+})

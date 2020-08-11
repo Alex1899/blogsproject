@@ -5,6 +5,10 @@ const blogSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    snippet:{
+        type: String,
+        required: true
+    },
     body: {
         type: String,
         required: true

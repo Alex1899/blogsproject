@@ -7,13 +7,36 @@
           <% if(blogs.length > 0){ %>
           <% blogs.forEach((blog)=>{ %>
               <div class='blog__row'>
-                <h3><%= blog.title %></h3>
-                <p><%= blog.body %></p>
+                <div>
+                  <a href="/blogs/<%= blog._id %>" >
+                    <h3><%= blog.title %></h3>
+                    <p><%= blog.snippet %></p>
+                  </a>
+                </div>
+                <a class="delete__icon" data-id="<%= blog._id %>"><i class="fa fa-trash-o" style="font-size:36px"></i></a>
               </div>
             <% })}else{%>
                 <h2>There are no blogs in the database.</h2>
                 <%}%>
                 
         </div>
+        <script>
+            const delete_icon = document.querySelector('a.delete__icon');
+
+            delete_icon.addEventListener('click', (e) => {
+                const endpoint = `/blogs/${delete_icon.dataset.id}`;
+
+                fetch(endpoint, {
+                    method: 'DELETE',
+                })
+                .then((result) => result.json())
+                .then(data => {
+                    window.location.href = data.redirect;
+                })
+                .catch((err) => console.log(err));
+                
+            });
+            
+        </script>
     </body>
 </html>

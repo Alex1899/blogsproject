@@ -32,14 +32,20 @@ ul {
    align-items: flex-end;
    margin-right: 30px;
 }
-
 a {
     text-decoration: none;
-    color:#676565;
 }
+
 a:hover{
     opacity: 0.5;
 }
+
+
+li > a {
+    color:#676565;
+}
+
+
 
 li {
     list-style-type: none; 
@@ -56,6 +62,13 @@ li {
 
 .blog__row {
     margin-bottom: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.delete__icon{
+    margin-right: 100px;
 }
 
 /* About */
@@ -79,6 +92,7 @@ form {
    
    
 }
+
 form > input {
     margin-bottom: 15px;
 }
@@ -89,4 +103,23 @@ form > label {
 form > button {
     margin-top: 20px;
     width: 80px
+}
+
+/* Blog Post*/
+.blog{
+    max-width: 1200px;
+    margin: auto;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+
+}
+
+.blog > h2 {
+    text-align: center;
+}
+
+.blog > p {
+    margin-top: 50px;
+    white-space: pre-wrap;
 }
